@@ -1,0 +1,38 @@
+&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=ISO-8859-1&quot; pageEncoding=&quot;ISO-8859-1&quot;%&gt;
+&lt;%@page import=&quot;java.io.*&quot; %&gt;
+&lt;%@page import=&quot;java.sql.*&quot;%&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;%
+String name1=request.getParameter(&quot;stdname&quot;);
+Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+Connection con=DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/j2eelab&quot;,&quot;root&quot;,&quot;&quot;);
+
+Statement stmt=con.createStatement();
+
+int s=stmt.executeUpdate(&quot;Insert into stud_name values(&#39;&quot;+name1+&quot;&#39;)&quot;);
+response.sendRedirect(&quot;Index.jsp&quot;);
+
+%&gt;
+&lt;/body&gt;
+
+
+Delete.jsp
+
+
+&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=ISO-8859-1&quot; pageEncoding=&quot;ISO-8859-1&quot;%&gt;
+&lt;%@page import=&quot;java.io.*&quot; %&gt;
+&lt;%@page import=&quot;java.sql.*&quot;%&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;%
+String[] List1=request.getParameterValues(&quot;List1&quot;);
+Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+Connection con=DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/j2eelab&quot;,&quot;root&quot;,&quot;&quot;);
+Statement stmt=con.createStatement();
+String Qry;
+for(int i=0;i&lt;List1.length;i++)
+{
+int s2=stmt.executeUpdate(&quot;Delete from stud_name where name=&#39;&quot;+List1[i]+&quot;&#39;&quot;);
+}
+response.sendRedirect(&quot;Index.jsp
